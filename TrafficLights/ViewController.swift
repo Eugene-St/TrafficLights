@@ -16,7 +16,9 @@ class ViewController: UIViewController {
   
   @IBOutlet var startButton: UIButton!
   
-  var tag = 1
+  private var tag = 1
+  private let lightIsOn: CGFloat = 1
+  private let lightIsOff: CGFloat = 0.3
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,10 +44,9 @@ class ViewController: UIViewController {
     circleCorners(for: greenLightView)
     
     // Settings 0.3 alpha for views
-    redLIghtView.alpha = 0.3
-    orangeLightView.alpha = 0.3
-    greenLightView.alpha = 0.3
-    
+    redLIghtView.alpha = lightIsOff
+    orangeLightView.alpha = lightIsOff
+    greenLightView.alpha = lightIsOff
     
   }
   
@@ -53,16 +54,15 @@ class ViewController: UIViewController {
     startButton.setTitle("Next", for: .normal)
     
     switch tag {
-    case 1: view.viewWithTag(tag + 2)?.alpha = 0.3; setAlphaAndIncreaseTag()
-    case 2: view.viewWithTag(tag - 1)?.alpha = 0.3; setAlphaAndIncreaseTag()
-    case 3: view.viewWithTag(tag - 1)?.alpha = 0.3; view.viewWithTag(tag)?.alpha = 1.0; tag = 1
+    case 1: view.viewWithTag(tag + 2)?.alpha = lightIsOff; setAlphaAndIncreaseTag()
+    case 2: view.viewWithTag(tag - 1)?.alpha = lightIsOff; setAlphaAndIncreaseTag()
+    case 3: view.viewWithTag(tag - 1)?.alpha = lightIsOff; view.viewWithTag(tag)?.alpha = lightIsOn; tag = 1
     default: break
     }
-    
   }
   
   private func setAlphaAndIncreaseTag() {
-    view.viewWithTag(tag)?.alpha = 1.0
+    view.viewWithTag(tag)?.alpha = lightIsOn
     tag += 1
   }
 
